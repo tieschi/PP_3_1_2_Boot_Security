@@ -18,6 +18,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
 
     private final UserService userService;
@@ -29,13 +30,13 @@ public class AdminController {
         this.roleService = roleService;
     }
 
-    @GetMapping("/admin")
+    @GetMapping("")
     public String userList(Model model) {
         model.addAttribute("allUsers", userService.getAllUsers());
         return "allUsers";
     }
 
-    @GetMapping("/admin/addUser")
+    @GetMapping("/addUser")
     public String addNewUser(Model model) {
 
         User user = new User();
@@ -44,7 +45,7 @@ public class AdminController {
         return "info";
     }
 
-    @RequestMapping("/admin/update")
+    @RequestMapping("/update")
     public String updateUser(@RequestParam("id") int id, Model model) {
 
         User user = userService.getUser(id);
@@ -53,7 +54,7 @@ public class AdminController {
         return "info";
     }
 
-    @PostMapping("/admin/saveUser")
+    @PostMapping("/saveUser")
     public String saveUser(@Valid User user, BindingResult bindingResult,
                            @RequestParam(required=false) String roleUser,
                            @RequestParam(required=false) String roleAdmin) {
@@ -72,7 +73,7 @@ public class AdminController {
             return "redirect:/admin";
         }
     }
-    @RequestMapping("/admin/delete")
+    @RequestMapping("/delete")
     public String deleteUser(@RequestParam("id") int id) {
 
         userService.deleteUser(id);

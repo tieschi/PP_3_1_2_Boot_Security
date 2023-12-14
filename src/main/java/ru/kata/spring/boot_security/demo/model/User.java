@@ -18,7 +18,7 @@ public class User implements Serializable, UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     @Pattern(regexp = "[a-zA-Z]+", message = "the name cannot be empty and should consist only of letters")
     private String username;
     @Column(name = "surname")
