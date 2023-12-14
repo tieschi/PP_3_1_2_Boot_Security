@@ -1,0 +1,37 @@
+<!doctype html>
+<html >
+<body>
+
+<h2>Info</h2>
+<br>
+
+<form th:action="@{/admin/saveUser}"
+      th:object="${user}" method="POST">
+    <input type="hidden" th:field="*{id}">
+    Name:
+    <input type="text" th:field="*{username}" />
+    <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">name error</div>
+    <br/>
+    Surname:
+    <input type="text" th:field="*{surname}" />
+    <div th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">surname error</div>
+    <br/>
+    Age:
+    <input type="text" th:field="*{age}" />
+    <div th:if="${#fields.hasErrors('age')}" th:errors="*{age}">age error</div>
+    <br/>
+    Password:
+    <input type="text" th:field="*{password}" />
+    <div th:if="${#fields.hasErrors('age')}" th:errors="*{password}">age error</div>
+    <br/>
+    Role:
+    <input type="checkbox" name="roleUser" th:checked="${roleUser}" th:value="ROLE_USER" th:text="Пользователь">
+    <br/>
+    <input type="checkbox" name="roleAdmin" th:checked="${roleAdmin}" th:value="ROLE_ADMIN" th:text="Администратор">
+    <br/>
+    <input type="submit" value="Ok" />
+</form>
+
+
+</body>
+</html>

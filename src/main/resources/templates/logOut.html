@@ -1,0 +1,5 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <form th:if="${#request.userPrincipal != null}" th:action="@{/logout}">
+        <button type="submit">Выйти</button>
+    </form>
+</div>
