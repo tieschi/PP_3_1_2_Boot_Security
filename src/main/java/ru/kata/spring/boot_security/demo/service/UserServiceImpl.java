@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.dao.UserRepository;
 import ru.kata.spring.boot_security.demo.model.User;
@@ -18,6 +19,9 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -26,8 +30,9 @@ public class UserServiceImpl implements UserService{
     @Transactional
     @Override
     public void addUser(User user) {
-        String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(10));
-        user.setPassword(hashed);
+        ;
+//        String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(10));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
